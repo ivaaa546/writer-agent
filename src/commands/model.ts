@@ -5,7 +5,7 @@
 import chalk from "chalk";
 import { getActiveProvider, getConfig, setConfig } from "../auth/auth-manager.js";
 import { getProviderById } from "../providers/router.js";
-import { select, input } from "@inquirer/prompts";
+import { select, input } from "../utils/prompts.js";
 
 export async function modelCommand(): Promise<void> {
   const activeId = getActiveProvider();

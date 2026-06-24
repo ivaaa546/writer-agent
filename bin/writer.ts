@@ -115,16 +115,12 @@ chatCmd
   .command("list")
   .description("Listar conversaciones del proyecto activo")
   .action(async () => {
-    const { chatListCommand } = await import("../src/commands/chat.js");
-    chatListCommand();
-  });
-
-chatCmd
-  .command("delete <id>")
-  .description("Eliminar una conversación")
-  .action(async (id: string) => {
-    const { chatDeleteCommand } = await import("../src/commands/chat.js");
-    chatDeleteCommand(id);
+    const { chatListCommand, chatCommand } = await import("../src/commands/chat.js");
+    const selected = await chatListCommand();
+    if (selected) {
+      await chatCommand({ resume: selected });
+    }
+    process.exit(0);
   });
 
 // ─── Write ─────────────────────────────────────────────────────────────────
